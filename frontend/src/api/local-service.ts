@@ -1,5 +1,6 @@
 import { MODULE_BY_KEY } from '@/data/modules'
 import { allRows, listRows, resetRows, saveRows } from '@/data/local-store'
+import { dutyStats } from '@/api/duty-service'
 import type { ActionResult, EntryRow, ModuleMeta, OverviewResult, PageResult } from '@/data/types'
 
 // 会写进数据的「往回走」动作：命中就把这条记录标成异常态，看板上能一眼看出来。
@@ -95,6 +96,17 @@ export function loadOverview(): OverviewResult {
       abnormal: entries.filter((row) => row.abnormal).length,
     }
   })
+  // 值班台账走独立存储，概览这一册读台账真实数据，不能空着一本册子。
+  const dutyIndex = modules.findIndex((item) => item.name === '值班值守与交接班台账')
+  if (dutyIndex >= 0) {
+    const stats = dutyStats()
+    modules[dutyIndex] = {
+      name: '值班值守与交接班台账',
+      created: stats.shifts,
+      pending: stats.awaiting + stats.received,
+      abnormal: stats.rejected,
+    }
+  }
   const cards = [
     { label: '业务模块', value: modules.length },
     { label: '登记总量', value: modules.reduce((sum, item) => sum + item.created, 0) },

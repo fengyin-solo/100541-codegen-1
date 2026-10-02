@@ -64,7 +64,8 @@
     </table>
 
     <footer class="page-foot">
-      <span>共 {{ total }} 条群测群防巡查记录</span>
+      <span>共 {{ total }} 条群测群防巡查记录（值班交接办结回写的待跟进事项也在此列）</span>
+      <span class="legend-item">值班台账统一交班时间：{{ sharedHandoverTime || '暂无登记' }}</span>
       <span v-if="errorMessage" class="error-text">{{ errorMessage }}</span>
     </footer>
   </section>
@@ -79,6 +80,7 @@ import {
   moduleMeta,
   runAction as applyAction,
 } from '@/api/local-service'
+import { latestHandoverTime } from '@/api/duty-service'
 import type { EntryRow } from '@/data/types'
 
 const meta = moduleMeta('patrol')
@@ -90,6 +92,8 @@ const stats = [{"label": "待巡查任务", "value": 0}, {"label": "发现异常
 const rows = ref<EntryRow[]>([])
 const total = ref(0)
 const errorMessage = ref('')
+// 与值班台账各入口读同一份交班时间，不另算、不各说各话。
+const sharedHandoverTime = latestHandoverTime()
 const filters = ref<Record<string, string>>({})
 const filterFields = columns.slice(0, 3)
 const statusSummary = computed(() =>
