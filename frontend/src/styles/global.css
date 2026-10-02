@@ -35,3 +35,31 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .error-text { color: #b42318; }
 .status-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; font-size: 12px; color: var(--muted); }
 .legend-item { background: #eef2f7; border-radius: 999px; padding: 2px 10px; }
+
+/* 值班值守交接班台账：分栏看板 */
+.clock-bar { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; }
+.clock-input { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+.clock-value { font-size: 13px; font-weight: 600; }
+.board { display: flex; gap: 12px; align-items: flex-start; overflow-x: auto; padding-bottom: 8px; }
+.shift-column { flex: 0 0 280px; background: #eef2f7; border: 1px solid var(--border); border-radius: 8px; padding: 10px; min-height: 120px; }
+.pending-column { background: #fef3f2; border-color: #fda29b; }
+.shift-head { display: flex; flex-direction: column; gap: 2px; margin-bottom: 8px; font-size: 13px; }
+.shift-person { color: var(--muted); font-size: 12px; }
+.shift-time { font-size: 12px; color: #344054; }
+.shift-time.empty { color: var(--muted); font-style: italic; }
+.handover-card { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; }
+.handover-card.abnormal { border-color: #f04438; background: #fff5f4; }
+.handover-text { margin: 0 0 6px; font-size: 13px; line-height: 1.5; }
+.handover-source { margin: 0 0 4px; font-size: 12px; color: var(--muted); }
+.handover-meta { display: flex; flex-direction: column; gap: 2px; margin: 0; font-size: 12px; color: var(--muted); }
+.handover-warn { color: #b42318; font-size: 12px; margin: 4px 0; }
+.card-row { display: flex; gap: 8px; align-items: center; margin-top: 6px; flex-wrap: wrap; }
+.card-row input { padding: 4px 6px; }
+.status-tag { align-self: flex-start; border-radius: 999px; padding: 1px 10px; font-size: 12px; background: #e2e8f0; color: #334155; }
+.status-tag[data-status="已签收"] { background: #e0f2fe; color: #0369a1; }
+.status-tag[data-status="已接班"] { background: #fef9c3; color: #a16207; }
+.status-tag[data-status="已办结"] { background: #dcfce7; color: #15803d; }
+.block-btn { width: 100%; }
+.register-box { background: #fff; border: 1px dashed var(--brand); border-radius: 6px; padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+.register-box textarea, .register-box input { padding: 6px; border: 1px solid var(--border); border-radius: 4px; font-family: inherit; font-size: 13px; }
+.register-time { margin: 0; font-size: 12px; color: var(--muted); }
